@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="bird_height">40dp</dimen>
+    <dimen name="bird_width">66dp</dimen>
+    <dimen name="bird_x">50dp</dimen>
+    <dimen name="gravity_easy">1.2dp</dimen>//do roi
+    <dimen name="gravity_medium">1.5dp</dimen>
+    <dimen name="gravity_hard">1.0dp</dimen>
+    <dimen name="flappy_boost_easy">-16dp</dimen>// buoc nhay
+    <dimen name="flappy_boost_medium">-15dp</dimen>
+    <dimen name="flappy_boost_hard">-14dp</dimen>
+    //background
+    <dimen name="bkg_top_height">150dp</dimen>
+    <dimen name="bkg_bottom_height">200dp</dimen>
+    //obstacle
+    <dimen name="obstacle_width">100dp</dimen>
+    <dimen name="obstacle_separation">275dp</dimen>
+    <dimen name="obstacle_speed_esay">4dp</dimen>
+    <dimen name="obstacle_speed_medium">5dp</dimen>
+    <dimen name="obstacle_speed_hard">6dp</dimen>
+    <dimen name="head_height">30dp</dimen>
+    <dimen name="head_extra_width">20dp</dimen>
+    <dimen name="obstacle_min_position">100dp</dimen>
+    <dimen name="obstacle_interval">350dp</dimen>//khoang cach giua cac cot
+    //coin
+    <dimen name="coin_height">50dp</dimen>
+    <dimen name="coin_width">50dp</dimen>
+</resources>
