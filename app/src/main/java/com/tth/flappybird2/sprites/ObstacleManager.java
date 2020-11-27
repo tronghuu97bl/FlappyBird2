@@ -57,7 +57,6 @@ public class ObstacleManager implements Sprite, ObstacleCallback {
         duplicate.addAll(obstacles);
         for (Obstacle obstacle : duplicate) {
             obstacle.update();
-
         }
     }
 

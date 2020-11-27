@@ -13,16 +13,18 @@ import java.util.HashMap;
 
 public class Score implements Sprite {
     private static final String SCORE_PREF = "Score_fre";
+    private static final String COIN_PREF = "coin_fre";
     private int screenHeight, screenWidth;
     private Bitmap zero, one, two, three, four, five, six, seven, eight, nine;
-    private Bitmap bmpScore, bmpBest;
-    private int score, topscore;
+    private Bitmap bmpScore, bmpBest, bmpCoin;
+    private int score, topscore, sumCoin;
     private boolean collision = false;
     private HashMap<Integer, Bitmap> map = new HashMap<>();
 
-    public Score(Resources resources, int screenHeight, int screenWidth) {
+    public Score(Resources resources, int screenHeight, int screenWidth, int coin) {
         this.screenHeight = screenHeight;
         this.screenWidth = screenWidth;
+        this.sumCoin = coin;
         zero = BitmapFactory.decodeResource(resources, R.drawable.zero);
         one = BitmapFactory.decodeResource(resources, R.drawable.one);
         two = BitmapFactory.decodeResource(resources, R.drawable.two);
@@ -35,6 +37,8 @@ public class Score implements Sprite {
         nine = BitmapFactory.decodeResource(resources, R.drawable.nine);
         bmpBest = BitmapFactory.decodeResource(resources, R.drawable.best);
         bmpScore = BitmapFactory.decodeResource(resources, R.drawable.score);
+        Bitmap bmpCoin_temp = BitmapFactory.decodeResource(resources, R.drawable.totalcoin);
+        bmpCoin = Bitmap.createScaledBitmap(bmpCoin_temp, screenWidth / 3, screenHeight / 10, false);
         map.put(0, zero);
         map.put(1, one);
         map.put(2, two);
@@ -49,7 +53,15 @@ public class Score implements Sprite {
 
     @Override
     public void draw(Canvas canvas) {
+        canvas.drawBitmap(bmpCoin, screenWidth / 20 * 13, 0, null);
+        //draw sum coin
+        ArrayList<Bitmap> sumcoin = convertToBitmaps(sumCoin);
+        for (int i = 0; i < sumcoin.size(); i++) {
+            int x = screenWidth / 10 * 9 - sumcoin.size() * zero.getWidth() / 2 + zero.getWidth() * i;
+            canvas.drawBitmap(sumcoin.get(i), x, 50, null);
+        }
         if (!collision) {
+            //draw score
             ArrayList<Bitmap> digits = convertToBitmaps(score);
             for (int i = 0; i < digits.size(); i++) {
                 int x = screenWidth / 2 - digits.size() * zero.getWidth() / 2 + zero.getWidth() * i;
@@ -99,6 +111,10 @@ public class Score implements Sprite {
         this.score = score;
     }
 
+    public void updateCoin(int coin) {
+        this.sumCoin = coin;
+    }
+
     public void collision(SharedPreferences prefs) {
         collision = true;
         topscore = prefs.getInt(SCORE_PREF, 0);
@@ -106,5 +122,6 @@ public class Score implements Sprite {
             prefs.edit().putInt(SCORE_PREF, score).apply();
             topscore = score;
         }
+        prefs.edit().putInt(COIN_PREF, sumCoin).apply();
     }
 }

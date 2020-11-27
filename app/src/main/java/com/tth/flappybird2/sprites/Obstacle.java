@@ -26,7 +26,7 @@ public class Obstacle implements Sprite {
     public Obstacle(Resources resources, int screenHeight, int screenWidth, ObstacleCallback obstacleCallback, GameDificulty gameDificulty) {
         image = BitmapFactory.decodeResource(resources, R.drawable.pipes);
         coin = BitmapFactory.decodeResource(resources, R.drawable.coin);
-        this.gameDificulty=gameDificulty;
+        this.gameDificulty = gameDificulty;
         this.screenHeight = screenHeight;
         this.screenWidth = screenWidth;
         this.obstacleCallback = obstacleCallback;
@@ -60,9 +60,9 @@ public class Obstacle implements Sprite {
         Rect bottomPipe = new Rect(xPosition + headExtraWidth, screenHeight - height, xPosition + width + headExtraWidth, screenHeight);
         Rect topPipe = new Rect(xPosition + headExtraWidth, 0, xPosition + headExtraWidth + width, screenHeight - height - separation - 2 * headHeight);
         Rect topHead = new Rect(xPosition, screenHeight - height - separation - 2 * headHeight, xPosition + width + 2 * headExtraWidth, screenHeight - height - separation - headHeight);
-        if (!collision)
+        if (!collision) {
             canvas.drawBitmap(coin, xPosition + 2 * headExtraWidth, coinY, null);
-
+        }
         Paint paint = new Paint();
         canvas.drawBitmap(image, null, bottomPipe, paint);
         canvas.drawBitmap(image, null, bottomHead, paint);
@@ -79,10 +79,12 @@ public class Obstacle implements Sprite {
             ArrayList<Rect> positions = new ArrayList<>();
             Rect bottomPosition = new Rect(xPosition, screenHeight - height - headHeight, xPosition + width + 2 * headExtraWidth, screenHeight);
             Rect topPosition = new Rect(xPosition, 0, xPosition + width + 2 * headExtraWidth, screenHeight - height - separation - headHeight);
-            Rect coinPosition = new Rect(xPosition + 2 * headExtraWidth, coinY, xPosition + 2 * headExtraWidth + widthCoin, coinY + heightCoin);
             positions.add(bottomPosition);
             positions.add(topPosition);
-            positions.add(coinPosition);
+            if (!collision) {
+                Rect coinPosition = new Rect(xPosition + 2 * headExtraWidth, coinY, xPosition + 2 * headExtraWidth + widthCoin, coinY + heightCoin);
+                positions.add(coinPosition);
+            }
             obstacleCallback.updatePosition(this, positions);
         }
     }

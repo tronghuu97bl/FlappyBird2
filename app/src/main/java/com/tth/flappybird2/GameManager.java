@@ -42,7 +42,7 @@ public class GameManager extends SurfaceView implements SurfaceHolder.Callback, 
     private GameMessage gameMessage;
     private GameDificulty gameDificulty;
     private Score scoreSprite;
-    private int score, difLevel;
+    private int score, difLevel, sumCoin;
     private MediaPlayer mpPoint, mpSwoosh, mpDie, mpHit, mpWing;
     private SharedPreferences pre;
 
@@ -71,6 +71,8 @@ public class GameManager extends SurfaceView implements SurfaceHolder.Callback, 
 
     private void initGame() {
         score = 0;
+        pre = getContext().getSharedPreferences(APP_NAME, Context.MODE_PRIVATE);
+        sumCoin = pre.getInt("coin_fre", 0);
         birdPosition = new Rect();
         obstacleListHashMap = new HashMap<>();
         bird = new Bird(getResources(), dm.heightPixels, this, gameDificulty);
@@ -78,7 +80,7 @@ public class GameManager extends SurfaceView implements SurfaceHolder.Callback, 
         obstacleManager = new ObstacleManager(getResources(), dm.heightPixels, dm.widthPixels, this, gameDificulty);
         gameOver = new GameOver(getResources(), dm.heightPixels, dm.widthPixels);
         gameMessage = new GameMessage(getResources(), dm.heightPixels, dm.widthPixels);
-        scoreSprite = new Score(getResources(), dm.heightPixels, dm.widthPixels);
+        scoreSprite = new Score(getResources(), dm.heightPixels, dm.widthPixels, sumCoin);
     }
 
     private void initSound() {
@@ -170,7 +172,6 @@ public class GameManager extends SurfaceView implements SurfaceHolder.Callback, 
                 initGame();
                 gameState = GameState.INITIAL;
                 break;
-
         }
         //bird.onTouchEvent();
         return super.onTouchEvent(event);
@@ -219,6 +220,18 @@ public class GameManager extends SurfaceView implements SurfaceHolder.Callback, 
                     collisionCoin = true;
                     if (collisionCoin) {
                         obstacle.setCollisionCoin(collisionCoin);
+                        switch (difLevel) {
+                            case 0:
+                                sumCoin++;
+                                break;
+                            case 1:
+                                sumCoin += 2;
+                                break;
+                            case 2:
+                                sumCoin += 3;
+                                break;
+                        }
+                        scoreSprite.updateCoin(sumCoin);
                     }
                 }
             }
