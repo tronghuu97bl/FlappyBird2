@@ -8,7 +8,7 @@ public class MainThread extends Thread {
     private GameManager gameManager;
     private boolean running;
     private static Canvas canvas;
-    private long targetFPS = 60;
+    private long targetFPS = 30;
 
     public MainThread(SurfaceHolder surfaceHolder, GameManager gameManager) {
         this.gameManager = gameManager;

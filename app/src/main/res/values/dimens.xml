@@ -15,9 +15,9 @@
     //obstacle
     <dimen name="obstacle_width">100dp</dimen>
     <dimen name="obstacle_separation">275dp</dimen>
-    <dimen name="obstacle_speed_esay">4dp</dimen>
-    <dimen name="obstacle_speed_medium">5dp</dimen>
-    <dimen name="obstacle_speed_hard">6dp</dimen>
+    <dimen name="obstacle_speed_esay">6dp</dimen>
+    <dimen name="obstacle_speed_medium">7dp</dimen>
+    <dimen name="obstacle_speed_hard">8dp</dimen>
     <dimen name="head_height">30dp</dimen>
     <dimen name="head_extra_width">20dp</dimen>
     <dimen name="obstacle_min_position">100dp</dimen>

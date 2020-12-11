@@ -45,9 +45,11 @@ public class GameManager extends SurfaceView implements SurfaceHolder.Callback, 
     private int score, difLevel, sumCoin;
     private MediaPlayer mpPoint, mpSwoosh, mpDie, mpHit, mpWing;
     private SharedPreferences pre;
+    private Context context;
 
     public GameManager(Context context, AttributeSet attributeSet) {
         super(context);
+        this.context = context;
         pre = getContext().getSharedPreferences("DIF", Context.MODE_PRIVATE);
         difLevel = pre.getInt("DIF", 0);
         switch (difLevel) {
@@ -75,7 +77,7 @@ public class GameManager extends SurfaceView implements SurfaceHolder.Callback, 
         sumCoin = pre.getInt("coin_fre", 0);
         birdPosition = new Rect();
         obstacleListHashMap = new HashMap<>();
-        bird = new Bird(getResources(), dm.heightPixels, this, gameDificulty);
+        bird = new Bird(getResources(), dm.heightPixels, this, gameDificulty, pre);
         background = new Background(getResources(), dm.heightPixels);
         obstacleManager = new ObstacleManager(getResources(), dm.heightPixels, dm.widthPixels, this, gameDificulty);
         gameOver = new GameOver(getResources(), dm.heightPixels, dm.widthPixels);

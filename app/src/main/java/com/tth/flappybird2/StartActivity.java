@@ -41,7 +41,8 @@ public class StartActivity extends Activity {
         ivStore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(StartActivity.this, StoreActivity.class);
+                startActivity(intent);
             }
         });
         tvLevel = findViewById(R.id.textView);
