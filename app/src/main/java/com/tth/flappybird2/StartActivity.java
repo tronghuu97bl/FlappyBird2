@@ -7,6 +7,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +25,7 @@ public class StartActivity extends Activity {
     private TextView tvLevel;
     private SharedPreferences preferences;
     private int dificulty_current;
+    private boolean mute = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,10 +76,21 @@ public class StartActivity extends Activity {
         });
 
         ivMute = findViewById(R.id.imageView5);
+        ivMute.setImageResource(R.drawable.volume);
         ivMute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //mute volume
+                if (mute) {
+                    AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+                    audioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_UNMUTE, 0);
+                    //Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mute);
+                    ivMute.setImageResource(R.drawable.volume);
+                } else {
+                    AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+                    audioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
+                    ivMute.setImageResource(R.drawable.mute);
+                    mute = true;
+                }
             }
         });
     }

@@ -62,7 +62,6 @@
         android:layout_height="36dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="4dp"
-        android:src="@drawable/volume"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

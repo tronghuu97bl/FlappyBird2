@@ -213,10 +213,9 @@ public class GameManager extends SurfaceView implements SurfaceHolder.Callback, 
                 Rect coinRect = obstacleListHashMap.get(obstacle).get(2);
                 if (birdPosition.right > bottomRect.left && birdPosition.left < bottomRect.right && birdPosition.bottom > bottomRect.top) {
                     collision = true;
-                } else {
-                    if (birdPosition.right > topRect.left && birdPosition.left < topRect.right && birdPosition.top < topRect.bottom) {
-                        collision = true;
-                    }
+                }
+                if (birdPosition.right > topRect.left && birdPosition.left < topRect.right && birdPosition.top < topRect.bottom) {
+                    collision = true;
                 }
                 if (birdPosition.right > coinRect.left && birdPosition.left < coinRect.right && birdPosition.bottom > coinRect.top && birdPosition.top < coinRect.bottom) {
                     collisionCoin = true;
